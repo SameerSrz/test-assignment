@@ -16,7 +16,7 @@ const PageSelector = () => {
         }
       }
     
-      const Checkbox = ({ isChecked, onClick, showHoverEffect = false }) => {
+      const Checkbox = ({ isChecked, onClick }) => {
         const [isHovered, setIsHovered] = useState(false);
     
         return (
@@ -24,13 +24,23 @@ const PageSelector = () => {
             onClick={onClick}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            className={`w-5 h-5 border-2 rounded transition-all duration-200 relative
-              ${isChecked ? 'bg-blue-500 border-blue-500' : 'border-gray-300'} 
-              ${isHovered ? 'shadow-[0_0_0_3px_rgba(59,130,246,0.1)]' : ''}`}
+            className={`
+              w-5 h-5 
+              border-2 
+              rounded 
+              relative
+              transition-all
+              duration-200
+              ${isChecked 
+                ? `${isHovered ? 'bg-[#5087F8] border-[#5087F8]' : 'bg-[#2469F6] border-[#2469F6]'}`
+                : 'border-gray-300'
+              }
+              ${isHovered ? 'shadow-[0_0_0_3px_rgba(59,130,246,0.1)]' : ''}
+            `}
           >
-            {(isChecked || (isHovered && showHoverEffect)) && (
-              <div className="absolute inset-0 flex items-center justify-center leading-none">
-                <span className={`text-[12px] ${isChecked ? 'text-white' : 'text-gray-300'}`}>✓</span>
+            {(isChecked || isHovered) && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className={isChecked ? 'text-white' : 'text-gray-300'}>✓</span>
               </div>
             )}
           </div>
@@ -56,14 +66,13 @@ const PageSelector = () => {
             {pages.map((page) => (
               <div 
                 key={page}
-                className="py-2 px-1 cursor-pointer flex justify-between items-center"
+                className="py-2 px-1 cursor-pointer flex justify-between items-center hover:bg-gray-50"
                 onClick={() => handleCheckbox(page)}
               >
                 <span>{page}</span>
                 <Checkbox 
                   isChecked={checkedBoxes.includes(page)}
                   onClick={(e) => handleCheckbox(page, e)}
-                  showHoverEffect={true}
                 />
               </div>
             ))}
