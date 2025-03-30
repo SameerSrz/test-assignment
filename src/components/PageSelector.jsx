@@ -56,7 +56,7 @@ const PageSelector = () => {
             {pages.map((page) => (
               <div 
                 key={page}
-                className="py-2 px-1 cursor-pointer flex justify-between items-center hover:bg-gray-50"
+                className="py-2 px-1 cursor-pointer flex justify-between items-center"
                 onClick={() => handleCheckbox(page)}
               >
                 <span>{page}</span>
